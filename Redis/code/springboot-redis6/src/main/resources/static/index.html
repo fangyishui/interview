@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试秒杀</title>
+</head>
+<body>
+
+    <h1> iPhone 13 Pro 秒杀</h1>
+
+    <form id="msform" name="msform" action="/seckill" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id = "prodid" name="prodid" value="0101">
+        <input type="button" id="miaosha_btn" name="seckill" value="秒杀开始">
+    </form>
+
+
+</body>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $(function (){
+        $("#miaosha_btn").click(function (){
+            var url = $("#msform").attr("action");
+            // console.log(url);
+            var serializeUrl = $("#msform").serialize();
+            var data = $("#msform").serialize();
+            console.log(serializeUrl);
+            $.post(url,$("#msform").serialize(),function (data){
+                if (data == 'false'){
+                    alert("抢光了")
+                    $("#miaosha_btn").attr("disabled",true);
+                }
+            })
+        })
+    })
+</script>
+</html>
